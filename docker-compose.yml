@@ -1,0 +1,22 @@
+version: '3'
+services:
+  db:
+    image: postgres:latest
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=root
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/rate_limiter
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+  redis:
+    image: redis
+    command: redis-server
+    ports:
+      - "6379:6379"
