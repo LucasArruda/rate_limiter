@@ -6,8 +6,9 @@ class TestControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test "should receive 429 on too many requests" do
-    Object.stub_const(:ENV, {'RATE_LIMIT' => 2}) do
+  test "should receive 429 after 200 when hits too many requests" do
+    env = ENV.to_hash.merge("RATE_LIMIT" => 2)
+    Object.stub_const(:ENV, env) do
       get test_index_url
       assert_response :success
 
