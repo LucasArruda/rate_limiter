@@ -1,29 +1,32 @@
 module RateLimit
   extend ActiveSupport::Concern
 
-  @@rate = ENV['RATE_LIMIT'] || 99
-  @@period = ENV['PERIOD'] || 3599
+  @testa = 99
+  @@rate = {}
+  @@rate_default = ENV['RATE_LIMIT'] || 98
+  @@period = {}
+  @@period_default = ENV['PERIOD'] || 3598
 
   included do
     before_action :rate_limiter
 
     def self.rate(rate)
-      @@rate = rate
+      @@rate[controller_name] = rate
     end
 
     def self.period(period)
-      @@period = period
+      @@period[controller_name] = period
     end
   end
 
   protected
 
   def defined_rate_limit
-    ENV['FORCE_RATE_LIMIT'] || @@rate
+    ENV['FORCE_RATE_LIMIT'] || @@rate[controller_name] || @@rate_default
   end
 
   def defined_period
-    ENV['FORCE_PERIOD'] || @@period
+    ENV['FORCE_PERIOD'] || @@period[controller_name] || @@period_default
   end
 
   def rate_limiter
