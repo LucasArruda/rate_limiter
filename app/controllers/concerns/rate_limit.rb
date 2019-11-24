@@ -19,11 +19,11 @@ module RateLimit
   protected
 
   def defined_rate_limit
-    @rate || ENV['RATE_LIMIT'] || 99
+    ENV['FORCE_RATE_LIMIT'] || @@rate
   end
 
   def defined_period
-    @period || ENV['PERIOD'] || 3599
+    ENV['FORCE_PERIOD'] || @@period
   end
 
   def rate_limiter
