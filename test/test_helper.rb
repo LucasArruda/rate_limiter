@@ -8,8 +8,4 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
-
-  before :each do
-    $redis.flushdb
-  end
 end
