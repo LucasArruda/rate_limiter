@@ -24,6 +24,8 @@ mv config/database.yml config/database.yml.bak
 mv config/database.pg.yml config/database.yml
 ```
 
+Fill specific DB settings like PG user/role, port and address, if you don't have the typical defaults.
+
 Configure database
 `rails db:create`
 
