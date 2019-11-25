@@ -1,5 +1,28 @@
 # Rate Limiter
 
+Rate Limiter is a rails module that can easily limit requests per client for all endpoints or for specific ones.
+
+To add it, all you have to do is `include RateLimit` in ApplicationController to have it on all your controllers using default settings of 100 request per hour (3600 seconds).
+
+You can also add it directly to the controller you want to be rate limited.
+
+To customize, just use helper methods `rate` and `period`, as following:
+
+```
+class AnImportantController < ApplicationController
+  include RateLimit
+
+  # those are the default (optional declaration)
+  rate 100 # one hundred request
+  period 3600 # one hour
+
+  …
+end
+```
+
+How to run
+---
+
 Easy run with docker (recommended) or run directly in the system.
 
 ## Running in the system
