@@ -1,7 +1,6 @@
 module RateLimit
   extend ActiveSupport::Concern
 
-  @testa = 99
   @@rate = {}
   @@rate_default = ENV['RATE_LIMIT'] || 98
   @@period = {}
@@ -43,10 +42,10 @@ module RateLimit
   end
 
   def count
-    unless counter
-      $redis.set(client_key, 0)
-      $redis.expire(client_key, defined_period)
-    end
+    return if counter
+
+    $redis.set(client_key, 0)
+    $redis.expire(client_key, defined_period)
   end
 
   def increment
@@ -66,7 +65,7 @@ module RateLimit
   end
 
   def client_key
-    requester_ip = request.env['REMOTE_ADDR']
+    requester_ip = request.env['REMOTE_IP']
 
     "#{requester_ip}_counter"
   end
