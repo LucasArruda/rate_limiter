@@ -14,7 +14,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'redis', '~> 4.0'
 gem 'bootsnap', '>= 1.1.0', require: false
 
-gem 'rack', '~> 2.2', '>= 2.2.8.1'
+gem 'rack', '~> 2.2'
 gem 'nokogiri', '>= 1.15.7'
 gem 'rexml', '>= 3.2.7'
 gem 'addressable', '>= 2.9.0'
